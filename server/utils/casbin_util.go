@@ -24,29 +24,42 @@ func GetCasbin() *casbin.SyncedCachedEnforcer {
 			return
 		}
 		text := `
-		[request_definition]
-		r = sub, obj, act
-		
-		[policy_definition]
-		p = sub, obj, act
-		
-		[role_definition]
-		g = _, _
-		
-		[policy_effect]
-		e = some(where (p.eft == allow))
-		
-		[matchers]
-		m = r.sub == p.sub && keyMatch2(r.obj,p.obj) && r.act == p.act
-		`
+          [request_definition]
+          r = sub, dom, obj, act
+          
+          [policy_definition]
+          p = sub, dom, obj, act
+          
+          [role_definition]
+          g = _, _, _
+          
+          [policy_effect]
+          e = some(where (p.eft == allow))
+          
+          [matchers]
+          # Allow if:
+          #  - policy domain is "*" (global) OR equals request domain
+          #  - AND subject has role in the domain (or in "*" global domain)
+          #  - AND object match & action match
+          m = (p.dom == "*" || p.dom == r.dom) && (g(r.sub, p.sub, r.dom) || g(r.sub, p.sub, "*")) && keyMatch2(r.obj, p.obj) && r.act == p.act
+          `
+
 		m, err := model.NewModelFromString(text)
 		if err != nil {
-			zap.L().Error("字符串加载模型失败!", zap.Error(err))
+			zap.L().Error("Casbin 模型加载失败!", zap.Error(err))
 			return
 		}
-		syncedCachedEnforcer, _ = casbin.NewSyncedCachedEnforcer(m, a)
+
+		syncedCachedEnforcer, err = casbin.NewSyncedCachedEnforcer(m, a)
+		if err != nil {
+			zap.L().Error("Casbin Enforcer 初始化失败!", zap.Error(err))
+			return
+		}
+
 		syncedCachedEnforcer.SetExpireTime(60 * 60)
-		_ = syncedCachedEnforcer.LoadPolicy()
+		if err := syncedCachedEnforcer.LoadPolicy(); err != nil {
+			zap.L().Error("加载策略失败!", zap.Error(err))
+		}
 	})
 	return syncedCachedEnforcer
 }
