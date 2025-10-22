@@ -11,9 +11,22 @@
         class="flex-1"
         placeholder="筛选路径"
       />
+      <el-input
+        v-model="searchUserText"
+        class="flex-1"
+        placeholder="搜索用户"
+        @click="fetchUserList"
+      />
       <el-button class="float-right" type="primary" @click="authApiEnter"
         >确 定</el-button
       >
+    </div>
+    <div class="mt-4">
+      <el-table :data="userList" border>
+        <el-table-column prop="nickname" label="用户昵称" />
+        <el-table-column prop="merchantName" label="商户名称" />
+        <el-table-column prop="merchantId" label="商户 ID" />
+      </el-table>
     </div>
     <div class="tree-content">
       <el-scrollbar>
@@ -49,6 +62,7 @@
 <script setup>
   import { getAllApis } from '@/api/api'
   import { UpdateCasbin, getPolicyPathByAuthorityId } from '@/api/casbin'
+  import { getUserList } from '@/api/user'
   import { ref, watch } from 'vue'
   import { ElMessage } from 'element-plus'
 
@@ -71,9 +85,29 @@
   })
   const filterTextName = ref('')
   const filterTextPath = ref('')
+  const searchUserText = ref('')
   const apiTreeData = ref([])
   const apiTreeIds = ref([])
   const activeUserId = ref('')
+  const userList = ref([])
+
+  const fetchUserList = async () => {
+    try {
+      const res = await getUserList({
+        page: 1,
+        pageSize: 10,
+        search: searchUserText.value
+      })
+      userList.value = res.data.users.map(user => ({
+        nickname: user.nickname,
+        merchantName: user.merchantName,
+        merchantId: user.merchantId
+      }))
+    } catch (error) {
+      ElMessage.error('获取用户列表失败')
+    }
+  }
+
   const init = async () => {
     const res2 = await getAllApis()
     const apis = res2.data.apis

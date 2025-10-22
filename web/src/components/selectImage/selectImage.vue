@@ -42,7 +42,7 @@
               <template #default="{ node, data }">
                 <div class="w-36" :class="search.classId === data.ID ? 'text-blue-500 font-bold' : ''">{{ data.name }}
                 </div>
-                <el-dropdown>
+                <el-dropdown trigger="click">
                   <el-icon class="ml-3 text-right" v-if="data.ID > 0"><MoreFilled /></el-icon>
                   <el-icon class="ml-3 text-right mt-1" v-else><Plus /></el-icon>
                   <template #dropdown>

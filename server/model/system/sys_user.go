@@ -33,6 +33,7 @@ type SysUser struct {
 	Enable        int            `json:"enable" gorm:"default:1;comment:用户是否被冻结 1正常 2冻结"`                                                    //用户是否被冻结 1正常 2冻结
 	OriginSetting common.JSONMap `json:"originSetting" form:"originSetting" gorm:"type:text;default:null;column:origin_setting;comment:配置;"` //配置
 	TenantId      int64          `json:"tenantId" gorm:"default:1;comment:租户ID"`                                                             //租户ID
+	TenantName    string         `json:"tenantName" gorm:"default:系统用户;comment:租户名称"`                                                        //租户名称
 }
 
 func (SysUser) TableName() string {
