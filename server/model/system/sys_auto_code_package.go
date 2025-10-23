@@ -14,5 +14,5 @@ type SysAutoCodePackage struct {
 }
 
 func (s *SysAutoCodePackage) TableName() string {
-	return "sys_auto_code_packages"
+	return "supplier_sys_auto_code_packages"
 }

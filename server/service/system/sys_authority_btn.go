@@ -15,7 +15,7 @@ var AuthorityBtnServiceApp = new(AuthorityBtnService)
 
 func (a *AuthorityBtnService) GetAuthorityBtn(req request.SysAuthorityBtnReq) (res response.SysAuthorityBtnRes, err error) {
 	var authorityBtn []system.SysAuthorityBtn
-	err = global.GVA_DB.Find(&authorityBtn, "authority_id = ? and sys_menu_id = ?", req.AuthorityId, req.MenuID).Error
+	err = global.GVA_DB.Find(&authorityBtn, "authority_id = ? and supplier_sys_menu_id = ?", req.AuthorityId, req.MenuID).Error
 	if err != nil {
 		return
 	}
@@ -30,7 +30,7 @@ func (a *AuthorityBtnService) GetAuthorityBtn(req request.SysAuthorityBtnReq) (r
 func (a *AuthorityBtnService) SetAuthorityBtn(req request.SysAuthorityBtnReq) (err error) {
 	return global.GVA_DB.Transaction(func(tx *gorm.DB) error {
 		var authorityBtn []system.SysAuthorityBtn
-		err = tx.Delete(&[]system.SysAuthorityBtn{}, "authority_id = ? and sys_menu_id = ?", req.AuthorityId, req.MenuID).Error
+		err = tx.Delete(&[]system.SysAuthorityBtn{}, "authority_id = ? and supplier_sys_menu_id = ?", req.AuthorityId, req.MenuID).Error
 		if err != nil {
 			return err
 		}
@@ -52,7 +52,7 @@ func (a *AuthorityBtnService) SetAuthorityBtn(req request.SysAuthorityBtnReq) (e
 }
 
 func (a *AuthorityBtnService) CanRemoveAuthorityBtn(ID string) (err error) {
-	fErr := global.GVA_DB.First(&system.SysAuthorityBtn{}, "sys_base_menu_btn_id = ?", ID).Error
+	fErr := global.GVA_DB.First(&system.SysAuthorityBtn{}, "supplier_sys_base_menu_btn_id = ?", ID).Error
 	if errors.Is(fErr, gorm.ErrRecordNotFound) {
 		return nil
 	}

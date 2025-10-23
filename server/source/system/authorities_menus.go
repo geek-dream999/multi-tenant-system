@@ -27,7 +27,7 @@ func (i *initMenuAuthority) TableCreated(ctx context.Context) bool {
 }
 
 func (i *initMenuAuthority) InitializerName() string {
-	return "sys_menu_authorities"
+	return "supplier_sys_menu_authorities"
 }
 
 func (i *initMenuAuthority) InitializeData(ctx context.Context) (next context.Context, err error) {

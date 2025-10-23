@@ -16,5 +16,5 @@ type SysDictionary struct {
 }
 
 func (SysDictionary) TableName() string {
-	return "sys_dictionaries"
+	return "supplier_sys_dictionaries"
 }

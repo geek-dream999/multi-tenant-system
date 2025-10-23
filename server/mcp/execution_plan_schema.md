@@ -123,7 +123,7 @@ type DataSource struct {
   "modulesInfo": [
     {
       "package": "user",
-      "tableName": "sys_users",
+      "tableName": "supplier_sys_users",
       "businessDB": "",
       "structName": "User",
       "packageName": "user",
@@ -166,7 +166,7 @@ type DataSource struct {
           "primaryKey": false,
           "dataSource": {
             "dbName": "gva",
-            "table": "sys_users",
+            "table": "supplier_sys_users",
             "label": "username",
             "value": "id",
             "association": 2,
@@ -292,7 +292,7 @@ type DataSource struct {
   "modulesInfo": [
     {
       "package": "system",
-      "tableName": "sys_roles",
+      "tableName": "supplier_sys_roles",
       "businessDB": "",
       "structName": "Role",
       "packageName": "system",
@@ -328,7 +328,7 @@ type DataSource struct {
     },
     {
       "package": "system",
-      "tableName": "sys_permissions",
+      "tableName": "supplier_sys_permissions",
       "businessDB": "",
       "structName": "Permission",
       "packageName": "system",
@@ -427,7 +427,7 @@ type DataSource struct {
           "require": true,
           "dataSource": {
             "dbName": "gva",
-            "table": "sys_users",
+            "table": "supplier_sys_users",
             "label": "username",
             "value": "id",
             "association": 2,
@@ -490,9 +490,9 @@ type DataSource struct {
 6. **checkDataSource**: 建议设为true，会验证关联表是否存在
 
 ### 常见关联场景
-- 用户关联：`{"table": "sys_users", "label": "username", "value": "id"}`
-- 角色关联：`{"table": "sys_authorities", "label": "authorityName", "value": "authorityId"}`
-- 部门关联：`{"table": "sys_departments", "label": "name", "value": "id"}`
+- 用户关联：`{"table": "supplier_sys_users", "label": "username", "value": "id"}`
+- 角色关联：`{"table": "supplier_sys_authorities", "label": "authorityName", "value": "authorityId"}`
+- 部门关联：`{"table": "supplier_sys_departments", "label": "name", "value": "id"}`
 - 分类关联：`{"table": "categories", "label": "name", "value": "id"}`
 
 ## 重要注意事项

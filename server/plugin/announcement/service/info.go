@@ -72,7 +72,7 @@ func (s *info) GetInfoDataSource() (res map[string][]map[string]any, err error) 
 	res = make(map[string][]map[string]any)
 
 	userID := make([]map[string]any, 0)
-	global.GVA_DB.Table("sys_users").Select("nick_name as label,id as value").Scan(&userID)
+	global.GVA_DB.Table("supplier_sys_users").Select("nick_name as label,id as value").Scan(&userID)
 	res["userID"] = userID
 	return
 }

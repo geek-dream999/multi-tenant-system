@@ -18,7 +18,7 @@ func init() {
 }
 
 func (i *initExcelTemplate) InitializerName() string {
-	return "sys_export_templates"
+	return "supplier_sys_export_templates"
 }
 
 func (i *initExcelTemplate) MigrateTable(ctx context.Context) (context.Context, error) {
@@ -46,7 +46,7 @@ func (i *initExcelTemplate) InitializeData(ctx context.Context) (context.Context
 	entities := []sysModel.SysExportTemplate{
 		{
 			Name:       "api",
-			TableName:  "sys_apis",
+			TableName:  "supplier_sys_apis",
 			TemplateID: "api",
 			TemplateInfo: `{
 "path":"路径",
@@ -57,7 +57,7 @@ func (i *initExcelTemplate) InitializeData(ctx context.Context) (context.Context
 		},
 	}
 	if err := db.Create(&entities).Error; err != nil {
-		return ctx, errors.Wrap(err, "sys_export_templates"+"表数据初始化失败!")
+		return ctx, errors.Wrap(err, "supplier_sys_export_templates"+"表数据初始化失败!")
 	}
 	next := context.WithValue(ctx, i.InitializerName(), entities)
 	return next, nil

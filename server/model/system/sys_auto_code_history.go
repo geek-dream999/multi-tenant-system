@@ -64,5 +64,5 @@ func (s *SysAutoCodeHistory) BeforeCreate(db *gorm.DB) error {
 }
 
 func (s *SysAutoCodeHistory) TableName() string {
-	return "sys_auto_code_histories"
+	return "supplier_sys_auto_code_histories"
 }

@@ -46,7 +46,7 @@ func (dictionaryService *DictionaryService) DeleteSysDictionary(sysDictionary sy
 	}
 
 	if sysDictionary.SysDictionaryDetails != nil {
-		return global.GVA_DB.Where("sys_dictionary_id=?", sysDictionary.ID).Delete(sysDictionary.SysDictionaryDetails).Error
+		return global.GVA_DB.Where("supplier_sys_dictionary_id=?", sysDictionary.ID).Delete(sysDictionary.SysDictionaryDetails).Error
 	}
 	return
 }

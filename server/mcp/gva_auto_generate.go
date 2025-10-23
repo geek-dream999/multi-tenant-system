@@ -194,7 +194,7 @@ func (t *AutomationModuleAnalyzer) New() mcp.Tool {
       "clearable": "是否可清空(bool)",
       "sort": "是否排序(bool)",
       "primaryKey": "是否主键(bool)",
-      "dataSource": "数据源配置(object) - 用于配置字段的关联表信息，结构：{\"dbName\":\"数据库名\",\"table\":\"关联表名\",\"label\":\"显示字段\",\"value\":\"值字段\",\"association\":1或2(1=一对一,2=一对多),\"hasDeletedAt\":true/false}。\n\n**获取表名提示：**\n- 可在 server/model 和 plugin/xxx/model 目录下查看对应模块的 TableName() 接口实现获取实际表名\n- 例如：SysUser 的表名为 \"sys_users\"，ExaFileUploadAndDownload 的表名为 \"exa_file_upload_and_downloads\"\n- 插件模块示例：Info 的表名为 \"gva_announcements_info\"\n\n**获取数据库名提示：**\n- 主数据库：通常使用 \"gva\"（默认数据库标识）\n- 多数据库：可在 config.yaml 的 db-list 配置中查看可用数据库的 alias-name 字段\n- 如果用户未提及关联多数据库信息 则使用默认数据库 默认数据库的情况下 dbName此处填写为空",
+      "dataSource": "数据源配置(object) - 用于配置字段的关联表信息，结构：{\"dbName\":\"数据库名\",\"table\":\"关联表名\",\"label\":\"显示字段\",\"value\":\"值字段\",\"association\":1或2(1=一对一,2=一对多),\"hasDeletedAt\":true/false}。\n\n**获取表名提示：**\n- 可在 server/model 和 plugin/xxx/model 目录下查看对应模块的 TableName() 接口实现获取实际表名\n- 例如：SysUser 的表名为 \"supplier_sys_users\"，ExaFileUploadAndDownload 的表名为 \"exa_file_upload_and_downloads\"\n- 插件模块示例：Info 的表名为 \"gva_announcements_info\"\n\n**获取数据库名提示：**\n- 主数据库：通常使用 \"gva\"（默认数据库标识）\n- 多数据库：可在 config.yaml 的 db-list 配置中查看可用数据库的 alias-name 字段\n- 如果用户未提及关联多数据库信息 则使用默认数据库 默认数据库的情况下 dbName此处填写为空",
       "checkDataSource": "是否检查数据源(bool) - 启用后会验证关联表的存在性",
       "fieldIndexType": "索引类型(string)"
     }]
@@ -228,7 +228,7 @@ func (t *AutomationModuleAnalyzer) New() mcp.Tool {
    - **association**: 关联关系类型（1=一对一关联，2=一对多关联）
    - **hasDeletedAt**: 关联表是否有软删除字段
    - **checkDataSource**: 设为true时会验证关联表的存在性
-   - 示例：{"dbName":"gva","table":"sys_users","label":"username","value":"id","association":2,"hasDeletedAt":true}`),
+   - 示例：{"dbName":"gva","table":"supplier_sys_users","label":"username","value":"id","association":2,"hasDeletedAt":true}`),
 		mcp.WithString("action",
 			mcp.Required(),
 			mcp.Description("执行操作：'analyze' 分析现有模块信息，'confirm' 请求用户确认创建，'execute' 执行创建操作（支持批量创建多个模块）"),
@@ -792,7 +792,7 @@ func (t *AutomationModuleAnalyzer) handleAnalyze(ctx context.Context, request mc
     "packageName": "文件名称小驼峰模式 一般是结构体名的小驼峰",
     "description": "中文描述",
     "abbreviation": "简称 package和结构体简称不可同名 小驼峰模式",
-    "humpPackageName": "一般是结构体名的下划线分割的小驼峰 例如：sys_user",
+    "humpPackageName": "一般是结构体名的下划线分割的小驼峰 例如：supplier_sys_user",
     "gvaModel": true,
     "autoMigrate": true,
     "autoCreateResource": true/false 用户不特地强调开启资源标识则为false,

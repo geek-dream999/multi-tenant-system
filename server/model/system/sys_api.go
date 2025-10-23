@@ -13,7 +13,7 @@ type SysApi struct {
 }
 
 func (SysApi) TableName() string {
-	return "sys_apis"
+	return "supplier_sys_apis"
 }
 
 type SysIgnoreApi struct {
@@ -24,5 +24,5 @@ type SysIgnoreApi struct {
 }
 
 func (SysIgnoreApi) TableName() string {
-	return "sys_ignore_apis"
+	return "supplier_sys_ignore_apis"
 }

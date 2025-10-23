@@ -121,7 +121,7 @@ func (userService *UserService) GetUserInfoList(info systemReq.GetUserList) (lis
 
 func (userService *UserService) SetUserAuthority(id uint, authorityId uint) (err error) {
 
-	assignErr := global.GVA_DB.Where("sys_user_id = ? AND sys_authority_authority_id = ?", id, authorityId).First(&system.SysUserAuthority{}).Error
+	assignErr := global.GVA_DB.Where("supplier_sys_user_id = ? AND supplier_sys_authority_authority_id = ?", id, authorityId).First(&system.SysUserAuthority{}).Error
 	if errors.Is(assignErr, gorm.ErrRecordNotFound) {
 		return errors.New("该用户无此角色")
 	}
@@ -133,7 +133,7 @@ func (userService *UserService) SetUserAuthority(id uint, authorityId uint) (err
 	}
 	var authorityMenu []system.SysAuthorityMenu
 	var authorityMenuIDs []string
-	err = global.GVA_DB.Where("sys_authority_authority_id = ?", authorityId).Find(&authorityMenu).Error
+	err = global.GVA_DB.Where("supplier_sys_authority_authority_id = ?", authorityId).Find(&authorityMenu).Error
 	if err != nil {
 		return err
 	}
@@ -176,7 +176,7 @@ func (userService *UserService) SetUserAuthorities(adminAuthorityID, id uint, au
 			global.GVA_LOG.Debug(TxErr.Error())
 			return errors.New("查询用户数据失败")
 		}
-		TxErr = tx.Delete(&[]system.SysUserAuthority{}, "sys_user_id = ?", id).Error
+		TxErr = tx.Delete(&[]system.SysUserAuthority{}, "supplier_sys_user_id = ?", id).Error
 		if TxErr != nil {
 			return TxErr
 		}
@@ -214,7 +214,7 @@ func (userService *UserService) DeleteUser(id int) (err error) {
 		if err := tx.Where("id = ?", id).Delete(&system.SysUser{}).Error; err != nil {
 			return err
 		}
-		if err := tx.Delete(&[]system.SysUserAuthority{}, "sys_user_id = ?", id).Error; err != nil {
+		if err := tx.Delete(&[]system.SysUserAuthority{}, "supplier_sys_user_id = ?", id).Error; err != nil {
 			return err
 		}
 		return nil

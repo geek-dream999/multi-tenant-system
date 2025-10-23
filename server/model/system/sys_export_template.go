@@ -28,7 +28,7 @@ type JoinTemplate struct {
 }
 
 func (JoinTemplate) TableName() string {
-	return "sys_export_template_join"
+	return "supplier_sys_export_template_join"
 }
 
 type Condition struct {
@@ -40,5 +40,5 @@ type Condition struct {
 }
 
 func (Condition) TableName() string {
-	return "sys_export_template_condition"
+	return "supplier_sys_export_template_condition"
 }

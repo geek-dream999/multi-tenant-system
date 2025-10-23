@@ -14,7 +14,7 @@ type SysParams struct {
 	Desc  string `json:"desc" form:"desc" gorm:"column:desc;comment:参数说明;"`                      //参数说明
 }
 
-// TableName 参数 SysParams自定义表名 sys_params
+// TableName 参数 SysParams自定义表名 supplier_sys_params
 func (SysParams) TableName() string {
-	return "sys_params"
+	return "supplier_sys_params"
 }

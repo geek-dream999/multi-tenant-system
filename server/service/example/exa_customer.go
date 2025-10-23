@@ -77,11 +77,11 @@ func (exa *CustomerService) GetCustomerInfoList(sysUserAuthorityID uint, info re
 		dataId = append(dataId, v.AuthorityId)
 	}
 	var CustomerList []example.ExaCustomer
-	err = db.Where("sys_user_authority_id in ?", dataId).Count(&total).Error
+	err = db.Where("supplier_sys_user_authority_id in ?", dataId).Count(&total).Error
 	if err != nil {
 		return CustomerList, total, err
 	} else {
-		err = db.Limit(limit).Offset(offset).Preload("SysUser").Where("sys_user_authority_id in ?", dataId).Find(&CustomerList).Error
+		err = db.Limit(limit).Offset(offset).Preload("SysUser").Where("supplier_sys_user_authority_id in ?", dataId).Find(&CustomerList).Error
 	}
 	return CustomerList, total, err
 }
